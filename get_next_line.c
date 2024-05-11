@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:06:39 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/11 18:40:41 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/11 18:45:02 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ char	*get_line(int fd, char *buf, char *backup)
 	int		check_read;
 
 	check_read = 1;
+	backup = ft_strdup("");
 	do
 	{
 		check_read = read(fd, buf, BUFFER_SIZE);
-		backup = ft_strdup("");
 		backup = ft_strjoin(backup, buf);
 	} while (!ft_strchr(backup, '\n'));
 	line = backup;
