@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:06:39 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/11 19:15:24 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:23:56 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,26 @@ char	*get_next_line(int fd)
 	if (!buf)
 		return (NULL);
 	line = get_line(fd, buf, backup);
+	free(buf);
 	return (line);
 }
 
 char	*get_line(int fd, char *buf, char *backup)
 {
-	char	*line;
 	int		check_read;
+	char	*tmp;
 
 	check_read = 1;
 	backup = ft_strdup("");
-	do
+	while (!(ft_strchr(backup, '\n')) || check_read < 0)
 	{
 		check_read = read(fd, buf, BUFFER_SIZE);
-		backup = ft_strjoin(backup, buf);
-	}while (!(ft_strchr(backup, '\n')));
-
-	line = backup;
-	return (line);
+		if (check_read < 0)
+			return (NULL);
+		buf[BUFFER_SIZE] = 0;
+		tmp = backup;
+		backup = ft_strjoin(tmp, buf);
+		free(tmp);
+	}
+	return (backup);
 }
