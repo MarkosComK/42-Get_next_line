@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 18:20:28 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/17 14:05:41 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:35:55 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,12 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	p = malloc(n);
 	str = (char *) p;
 	if (str)
+	{
 		while (n > 0)
 		{
 			str[n - 1] = 0;
 			n--;
 		}
+	}
 	return (str);
 }
