@@ -6,13 +6,13 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 18:20:28 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/11 18:39:03 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:05:41 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*endstr;
 	int		totlen;
@@ -65,7 +65,7 @@ char	*ft_strchr(const char *s, int c)
 char	*ft_strdup(const char *s)
 {
 	char	*dup;
-	size_t	i;
+	int		i;
 
 	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!dup)
@@ -78,4 +78,22 @@ char	*ft_strdup(const char *s)
 	}
 	dup[i] = 0;
 	return (dup);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*p;
+	char	*str;
+	int		n;
+
+	n = size * nmemb;
+	p = malloc(n);
+	str = (char *) p;
+	if (str)
+		while (n > 0)
+		{
+			str[n - 1] = 0;
+			n--;
+		}
+	return (str);
 }
