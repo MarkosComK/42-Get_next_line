@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:06:39 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/17 14:31:01 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:04:16 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*get_read(int fd, char *backup)
 	if (!buf)
 		return (NULL);
 	check_read = 1;
-	while (ft_strchr(backup, '\n') && check_read != 0)
+	while (!(ft_strchr(backup, '\n')) && check_read != 0)
 	{
 		check_read = read(fd, buf, BUFFER_SIZE);
 		if (check_read == -1)
