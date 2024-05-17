@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:06:39 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/17 16:26:56 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:11:49 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*backup;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	if (!backup)
 		backup = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
 	backup = get_read(fd, backup);
