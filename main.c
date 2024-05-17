@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:37:34 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/12 15:09:09 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:49:57 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,10 @@ int	main(void)
 {
 	int	fd = open("test.c", O_RDONLY);
 	char *line;
-	int	i = 0;
-	while (i <= 10)
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		line = get_next_line(fd);
 		printf("%s", line);
 		free(line);
-		i++;
 	}
 	return (0);
 }
