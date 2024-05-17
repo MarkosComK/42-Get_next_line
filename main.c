@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:37:34 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/17 13:49:57 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:08:58 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(void)
 	char *line;
 	while ((line = get_next_line(fd)) != NULL)
 	{
+		if (!line)
+			break;
 		printf("%s", line);
 		free(line);
 	}
