@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:06:39 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/17 15:04:16 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:14:29 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	backup = get_read(fd, backup);
 	line = get_line(backup);
+	free(backup);
 	return (line);
 }
 
@@ -32,6 +33,7 @@ char	*get_read(int fd, char *backup)
 {
 	int		check_read;
 	char	*buf;
+	char	*tmp;
 
 	buf = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
 	if (!buf)
@@ -47,7 +49,9 @@ char	*get_read(int fd, char *backup)
 			return (NULL);
 		}
 		buf[check_read] = 0;
-		backup = ft_strjoin(backup, buf);
+		tmp = backup;
+		backup = ft_strjoin(tmp, buf);
+		free(tmp);
 	}
 	free(buf);
 	return (backup);
