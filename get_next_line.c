@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:06:39 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/17 15:14:29 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:26:56 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 char	*get_read(int fd, char *backup);
 char	*get_line(char *vault);
+char	*get_rest(char *backup);
 
 char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	*backup;
 
-	backup = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
 	if (!backup)
-		return (NULL);
+		backup = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
 	backup = get_read(fd, backup);
 	line = get_line(backup);
-	free(backup);
+	backup = get_rest(backup);
 	return (line);
 }
 
@@ -66,7 +66,7 @@ char	*get_line(char *backup)
 	if (!backup[i])
 		return (NULL);
 	while (backup[i] && (backup[i] != '\n'))
-		++i;
+		i++;
 	line = ft_calloc(sizeof(char), (i + 2));
 	if (!line)
 		return (NULL);
@@ -74,13 +74,42 @@ char	*get_line(char *backup)
 	while (backup[i] && (backup[i] != '\n'))
 	{
 		line[i] = backup[i];
-		++i;
+		i++;
 	}
 	if (backup[i] == '\n')
 	{
 		line[i] = backup[i];
-		++i;
+		i++;
 	}
 	line[i] = '\0';
 	return (line);
+}
+
+char	*get_rest(char *backup)
+{
+	int		i;
+	int		rest_i;
+	char	*rest;
+
+	i = 0;
+	while (backup[i] && (backup[i] != '\n'))
+		i++;
+	if (!backup[i])
+	{
+		free(backup);
+		return (NULL);
+	}
+	rest = malloc(sizeof(char) * (ft_strlen(backup) - i + 1));
+	if (!rest)
+	{
+		free(rest);
+		return (NULL);
+	}
+	++i;
+	rest_i = 0;
+	while (backup[i])
+		rest[rest_i++] = backup[i++];
+	rest[rest_i] = '\0';
+	free(backup);
+	return (rest);
 }

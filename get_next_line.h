@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:07:48 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/17 14:24:50 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:45:47 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 char	*get_next_line(int fd);
 char	*get_read(int fd, char *backup);
+char	*get_rest(char *backup);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
