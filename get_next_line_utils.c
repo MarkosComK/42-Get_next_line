@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 18:20:28 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/18 21:17:07 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:37:27 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,24 @@
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*endstr;
-	int		totlen;
-	int		i;
+	char		*endstr;
+	size_t		totlen;
+	int			i;
+	int			j;
 
 	totlen = ft_strlen(s1) + ft_strlen(s2);
-	endstr = (char *)malloc(sizeof(char) * totlen + 1);
+	endstr = ft_calloc(sizeof(char), (totlen + 1));
 	if (!endstr)
 		return (NULL);
 	i = 0;
-	while (s1 && *s1)
+	while (s1 && s1[i])
 	{
-		endstr[i] = *s1;
+		endstr[i] = s1[i];
 		i++;
-		s1++;
 	}
-	while (s2 && *s2)
-	{
-		endstr[i] = *s2;
-		i++;
-		s2++;
-	}
-	endstr[i] = 0;
+	j = 0;
+	while (s2 && s2[j])
+		endstr[i++] = s2[j++];
 	free(s1);
 	return (endstr);
 }
@@ -65,42 +61,21 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(char *s)
-{
-	char		*dup;
-	size_t		i;
-
-	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (i < ft_strlen(s))
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = 0;
-	return (dup);
-}
-
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*p;
-	char	*str;
-	int		n;
+	unsigned char	*p;
+	size_t			i;
+	size_t			n;
 
 	n = size * nmemb;
 	p = malloc(n);
-	str = (char *) p;
-	if (str)
-	{
-		while (n > 0)
-		{
-			str[n - 1] = 0;
-			n--;
-		}
-	}
-	else
+	if (!p)
 		return (NULL);
-	return (str);
+	i = 0;
+	while (i < n)
+	{
+		p[i] = 0;
+		i++;
+	}
+	return (p);
 }
