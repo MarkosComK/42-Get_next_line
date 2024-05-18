@@ -6,7 +6,7 @@
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:06:39 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/17 18:14:43 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/18 19:59:43 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*get_line(char *backup)
 	char	*line;
 
 	i = 0;
-	if (!backup[i])
+	if (!backup)
 		return (NULL);
 	while (backup[i] && (backup[i] != '\n'))
 		i++;
@@ -94,6 +94,8 @@ char	*get_rest(char *backup)
 	char	*rest;
 
 	i = 0;
+	if (!backup)
+		return (NULL);
 	while (backup[i] && (backup[i] != '\n'))
 		i++;
 	if (!backup[i])
