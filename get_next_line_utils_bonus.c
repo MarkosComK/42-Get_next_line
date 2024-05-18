@@ -1,56 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 18:20:28 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/17 18:10:28 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:37:27 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*endstr;
-	int		totlen;
-	int		i;
+	char		*endstr;
+	size_t		totlen;
+	int			i;
+	int			j;
 
 	totlen = ft_strlen(s1) + ft_strlen(s2);
-	endstr = (char *)malloc(sizeof(char) * totlen + 1);
-	if (endstr == 0)
+	endstr = ft_calloc(sizeof(char), (totlen + 1));
+	if (!endstr)
 		return (NULL);
 	i = 0;
-	while (*s1)
+	while (s1 && s1[i])
 	{
-		endstr[i] = *s1;
+		endstr[i] = s1[i];
 		i++;
-		s1++;
 	}
-	while (*s2)
-	{
-		endstr[i] = *s2;
-		i++;
-		s2++;
-	}
-	endstr[i] = 0;
+	j = 0;
+	while (s2 && s2[j])
+		endstr[i++] = s2[j++];
+	free(s1);
 	return (endstr);
 }
 
-int	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
-	int	size;
+	size_t	size;
 
 	size = 0;
-	while (s[size])
+	while (s && s[size])
 		size++;
 	return (size);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
+	if (!s)
+		return (0);
 	while (*s)
 	{
 		if (*s == (char)c)
@@ -62,40 +61,21 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *s)
-{
-	char	*dup;
-	int		i;
-
-	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (i < ft_strlen(s))
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = 0;
-	return (dup);
-}
-
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*p;
-	char	*str;
-	int		n;
+	unsigned char	*p;
+	size_t			i;
+	size_t			n;
 
 	n = size * nmemb;
 	p = malloc(n);
-	str = (char *) p;
-	if (str)
+	if (!p)
+		return (NULL);
+	i = 0;
+	while (i < n)
 	{
-		while (n > 0)
-		{
-			str[n - 1] = 0;
-			n--;
-		}
+		p[i] = 0;
+		i++;
 	}
-	return (str);
+	return (p);
 }
