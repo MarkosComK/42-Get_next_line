@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marsoare <marsoare@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:06:39 by marsoare          #+#    #+#             */
-/*   Updated: 2024/05/18 21:15:17 by marsoare         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:49:16 by marsoare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_read(int fd, char *backup)
 {
@@ -97,14 +97,14 @@ char	*get_rest(char *backup)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*backup;
+	static char	*backup[MAX_FDS];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	backup = get_read(fd, backup);
-	if (!backup)
+	backup[fd] = get_read(fd, backup[fd]);
+	if (!backup[fd])
 		return (NULL);
-	line = get_line(backup);
-	backup = get_rest(backup);
+	line = get_line(backup[fd]);
+	backup[fd] = get_rest(backup[fd]);
 	return (line);
 }
